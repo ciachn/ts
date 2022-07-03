@@ -25,7 +25,7 @@ Element.register('r-splash',
 			}
 		})
 		.then(() => {
-			utils.runAfter(1000, () => {
+			utils.runAfter(250, () => {
 				this.dataset.anim = 'fade-out';
 				workflow.continueTo('home');
 			});
