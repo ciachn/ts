@@ -1,0 +1,35 @@
+<div class="item-list pb-5" data-watch="list">
+	[if [not [list.length]] [@
+		<div class="alert alert-danger">
+			There are no tasks to show.
+		</div>
+	]
+	else [@
+		[each i [list] [@
+			<div data-action="toggleTaskTimer" data-id="[i.id]">
+				<span>
+					<span class="line-clamp">[i.name]</span>
+					<small class="d-block"><small>[formatDuration [i.total]]</small></small>
+				</span>
+
+				[if [not [i.started]] [@
+					<i class="fa fa-trash-alt" data-action="deleteTask" data-id="[i.id]"></i>
+				]
+				else [@
+					<i class="fa fa-ban" data-action="cancelTimer" data-id="[i.id]"></i>
+					<em>
+						<i class="fa fa-play me-2"></i>
+						[formatDuration [elapsed [i.started]]]
+					</em>
+				]]
+
+			</div>
+		]]
+	]]
+</div>
+
+<div class="corner-buttons">
+	<a href="#/tasks/add/"><i class="fa fa-plus"></i></a>
+</div>
+
+<r-tasks-add></r-tasks-add>

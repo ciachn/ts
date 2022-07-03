@@ -1,0 +1,84 @@
+<r-tabs class="tabs-2" data-base-route="/reports/@/" data-initial="daily">
+	<a data-name="daily">Daily</a>
+	<a data-name="weekly">Weekly</a>
+	<a data-name="detailed">Detailed</a>
+</r-tabs>
+
+<div>
+
+	<div data-name="detailed">
+		<div class="item-list-2 pb-5" data-watch="tasks">
+			[each task [tasks] [@
+			<div>
+				<b>
+					[task.name]
+					<i data-action="cleanHours" data-id="[task.id]" class="fa fa-backspace"></i>
+				</b>
+
+				<div class="h">
+					<em>Started</em>
+					<em>Ended</em>
+					<em>Duration</em>
+				</div>
+
+				[each entry [task.hours] [@
+				<div>
+					<em>[entry.started]</em>
+					<em>[entry.ended]</em>
+					<em>[formatDuration [entry.duration]]</em>
+				</div>
+				]]
+			</div>
+			]]
+		</div>
+	</div>
+
+	<div data-name="daily">
+		<div class="item-list-2 pb-5" data-watch="tasks">
+			[each task [tasks] [@
+			<div>
+				<b>[task.name]</b>
+
+				<div class="h">
+					<em>Date</em>
+					<em>Duration</em>
+				</div>
+
+				[each entry [task.hours_per_date] [@
+				<div>
+					<em>[entry.date]</em>
+					<em>[formatDuration [entry.duration]]</em>
+				</div>
+				]]
+			</div>
+			]]
+		</div>
+	</div>
+
+	<div data-name="weekly">
+		<div class="item-list-2 pb-5" data-watch="tasks">
+			[each task [tasks] [@
+			<div>
+				<b>[task.name]</b>
+
+				<div class="h">
+					<em>Week</em>
+					<em>Duration</em>
+				</div>
+
+				[each entry [task.hours_per_week] [@
+				<div>
+					<em>[entry.date]</em>
+					<em>[formatDuration [entry.duration]]</em>
+				</div>
+				]]
+			</div>
+			]]
+		</div>
+	</div>
+
+</div>
+
+<div class="corner-buttons">
+	<a data-action="downloadCsv"><i class="fa fa-file-csv"></i></a>
+</div>
