@@ -212,7 +212,7 @@ function formatDate (value)
 
 function formatDuration (value)
 {
-	return align2(value / 60) + ':' + align2(value % 60);
+	return align2(int(value / 60)) + ':' + align2(value % 60);
 }
 
 function elapsedTime (date2, date1)
