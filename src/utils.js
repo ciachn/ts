@@ -2,6 +2,14 @@
 import CustomDialog from './elems/custom-dialog';
 
 /**
+ * Month names.
+ */
+const monthName = [
+	'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+	'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+];
+
+/**
  * Returns an object containing the differences between the given objects.
  * @param {object} oldObject
  * @param {object} newObject
@@ -204,10 +212,22 @@ function formatDateTime (value)
 	return value.getFullYear() + '-' + align2(value.getMonth() + 1) + '-' + align2(value.getDate()) + ' ' + align2(value.getHours()) + ':' + align2(value.getMinutes());
 }
 
+function formatShortDateTime (value)
+{
+	value = parseDate(value);
+	return monthName[value.getMonth()] + ' ' + align2(value.getDate()) + ' ' + align2(value.getHours()) + ':' + align2(value.getMinutes());
+}
+
 function formatDate (value)
 {
 	value = parseDate(value);
 	return value.getFullYear() + '-' + align2(value.getMonth() + 1) + '-' + align2(value.getDate());
+}
+
+function formatShortDate (value)
+{
+	value = parseDate(value);
+	return monthName[value.getMonth()] + ' ' + align2(value.getDate());
 }
 
 function formatDuration (value)
@@ -267,7 +287,9 @@ export default
 	align2,
 	parseDate,
 	formatDateTime,
+	formatShortDateTime,
 	formatDate,
+	formatShortDate,
 	formatDuration,
 	elapsedTime,
 	dateCompare,

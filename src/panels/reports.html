@@ -1,39 +1,11 @@
 <r-tabs class="tabs-2" data-base-route="/reports/@/" data-initial="daily">
 	<a data-name="daily">Daily</a>
 	<a data-name="weekly">Weekly</a>
+	<a data-name="category">Category</a>
 	<a data-name="detailed">Detailed</a>
 </r-tabs>
 
 <div>
-
-	<div data-name="detailed">
-		<div class="item-list-2 pb-5" data-watch="tasks">
-			[each task [tasks] [@
-			<div>
-				<b>
-					[task.name]
-					<i data-action="cleanHours" data-id="[task.id]" class="fa fa-backspace"></i>
-				</b>
-
-				<div class="h">
-					<em>Started</em>
-					<em>Ended</em>
-					<em>Duration</em>
-				</div>
-
-				[each entry [task.hours] [@
-				<div>
-					<em>[entry.started]</em>
-					<em>[entry.ended]</em>
-					<em>[formatDuration [entry.duration]]</em>
-				</div>
-				]]
-			</div>
-			]]
-		</div>
-
-		<br/><br/><br/>
-	</div>
 
 	<div data-name="daily">
 		<div class="item-list-2 pb-5" data-watch="tasks">
@@ -48,10 +20,15 @@
 
 				[each entry [task.hours_per_date] [@
 				<div>
-					<em>[entry.date]</em>
+					<em>[formatShortDate [entry.date]]</em>
 					<em>[formatDuration [entry.duration]]</em>
 				</div>
 				]]
+
+				<div class="h b">
+					<em><div class="text-end pe-3">Total</div></em>
+					<em>[formatDuration [task.total]]</em>
+				</div>
 			</div>
 			]]
 		</div>
@@ -72,10 +49,92 @@
 
 				[each entry [task.hours_per_week] [@
 				<div>
-					<em>[entry.date]</em>
+					<em>
+						[formatShortDate [entry.starts]]
+						to
+						[formatShortDate [entry.ends]]
+					</em>
 					<em>[formatDuration [entry.duration]]</em>
 				</div>
 				]]
+
+				<div class="h b">
+					<em><div class="text-end pe-3">Total</div></em>
+					<em>[formatDuration [task.total]]</em>
+				</div>
+			</div>
+			]]
+		</div>
+
+		<br/><br/><br/>
+	</div>
+
+	<div data-name="category">
+		<div class="item-list-2 pb-5" data-watch="categories">
+			[each catg [categories] [@
+			<div>
+				<b>
+					[catg.name]
+					<i data-action="cleanCategoryHours" data-category="[catg.name]" class="fa fa-backspace"></i>
+				</b>
+
+				<div class="h">
+					<em>Task</em>
+					<em>Started</em>
+					<em>Ended</em>
+					<em>Duration</em>
+				</div>
+
+				[each entry [catg.hours] [@
+				<div>
+					<em>[entry.task]</em>
+					<em>[formatShortDateTime [entry.started]]</em>
+					<em>[formatShortDateTime [entry.ended]]</em>
+					<em>[formatDuration [entry.duration]]</em>
+				</div>
+				]]
+
+				<div class="h b">
+					<em></em>
+					<em></em>
+					<em><div class="text-end pe-3">Total</div></em>
+					<em>[formatDuration [catg.total]]</em>
+				</div>
+			</div>
+			]]
+		</div>
+
+		<br/><br/><br/>
+	</div>
+
+	<div data-name="detailed">
+		<div class="item-list-2 pb-5" data-watch="tasks">
+			[each task [tasks] [@
+			<div>
+				<b>
+					[task.name]
+					<i data-action="cleanHours" data-id="[task.id]" class="fa fa-backspace"></i>
+				</b>
+
+				<div class="h">
+					<em>Started</em>
+					<em>Ended</em>
+					<em>Duration</em>
+				</div>
+
+				[each entry [task.hours] [@
+				<div>
+					<em>[formatShortDateTime [entry.started]]</em>
+					<em>[formatShortDateTime [entry.ended]]</em>
+					<em>[formatDuration [entry.duration]]</em>
+				</div>
+				]]
+
+				<div class="h b">
+					<em></em>
+					<em><div class="text-end pe-3">Total</div></em>
+					<em>[formatDuration [task.total]]</em>
+				</div>
 			</div>
 			]]
 		</div>

@@ -12,7 +12,7 @@ Element.register('r-splash',
 	{
 		this.addClass('text-center vertical-center');
 
-		db.init('ts', 1, (db, txn, version) =>
+		db.init('ts', 2, (db, txn, version) =>
 		{
 			let store;
 
@@ -23,8 +23,15 @@ Element.register('r-splash',
 				store = db.createObjectStore('hours', { keyPath: 'id', autoIncrement: true });
 				store.createIndex('task', 'task_id');
 			}
+
+			if (version < 2)
+			{
+				store = txn.objectStore('tasks');
+				store.createIndex('category', 'category');
+			}
 		})
 		.then(() => {
+			global.db = db;
 			utils.runAfter(250, () => {
 				this.dataset.anim = 'fade-out';
 				workflow.continueTo('home');

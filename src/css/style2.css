@@ -1,7 +1,7 @@
 /* ** */
 .tabs {
     flex: 0 0 auto; padding: 0; margin: 0; display: flex !important; flex-direction: row;
-	padding: 1rem 1rem 0 1rem;
+	padding: 0rem 0.25rem 0 0.25rem;
 }
 
 .tabs > a {
@@ -111,7 +111,7 @@ span.field-error {
 
 /* ** */
 .item-list {
-    padding: 0.5rem 1.5rem;
+    padding: 0.5rem 1.0rem;
 }
 
 .item-list > div {
@@ -143,7 +143,7 @@ span.field-error {
 
 /* ** */
 .item-list-2 {
-    padding: 0.5rem 1.5rem;
+    padding: 0.5rem 1.0rem;
 }
 
 .item-list-2 > div {
@@ -151,7 +151,7 @@ span.field-error {
 }
 
 .item-list-2 > div > b {
-    display: block; background: #111; color: #ddd; font-weight: bold; padding: 0.5rem 1rem; position: relative;
+    display: block; background: #111; color: #ddd; font-weight: bold; padding: 0.5rem 0.8rem; position: relative;
 }
 
 .item-list-2 > div > div {
@@ -172,11 +172,21 @@ span.field-error {
     font-size: 0.8em; font-weight: bold;
 }
 
+.item-list-2 > div > div.h.b {
+	color: #eee; font-family: 0.9em;
+}
+
 .item-list-2 > div > b > i {
     background: #222; padding: 0.4rem 0.8rem; border-radius: 0.3rem;
-    position: absolute; right: 0.5rem; top: 0.5rem;
+    position: absolute; right: 0.3rem; top: 0.3rem;
 }
 
 .item-list-2 > div > b > i:active {
     background: #c00;
+}
+
+/* ** */
+.badge-2 {
+    display: inline-block; padding: 0.15rem 0.35rem; line-height: 1; border-radius: 0.3rem; font-size: 0.8em;
+    background: #226;
 }

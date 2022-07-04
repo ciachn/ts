@@ -2,15 +2,16 @@
 import { db, Element } from 'riza';
 import fs from 'fs';
 
-Element.register('r-tasks-add', 'r-panel',
+Element.register('r-tasks-edit', 'r-panel',
 {
-	contents: fs.readFileSync(__dirname + '/tasks-add.html'),
+	contents: fs.readFileSync(__dirname + '/tasks-edit.html'),
 	model: { },
+	record: null,
 
 	init: function()
 	{
 		this.addClass('dialog bottom');
-		this.dataset.route = "/tasks/add/";
+		this.dataset.route = "/tasks/edit/:id";
 	},
 
 	ready: function()
@@ -31,7 +32,7 @@ Element.register('r-tasks-add', 'r-panel',
 		r.name = (r.name || '').trim();
 		if (r.name)
 		{
-			if ((await db.findOne('tasks', { name: r.name })) !== null)
+			if ((await db.findOne('tasks', { name: r.name }, { id: this.record.id })) !== null)
 				err.fields.name = 'Task with this name already exists.';
 		}
 		else
@@ -44,13 +45,18 @@ Element.register('r-tasks-add', 'r-panel',
 		if (Object.keys(err.fields).length)
 			return resolve(err);
 
-		db.insert('tasks', { name: r.name, category: r.category, started: null, total: 0 });
+		this.record.name = r.name;
+		this.record.category = r.category;
+
+		db.put('tasks', this.record);
 		resolve({ response: 200 });
 	},
 
-	'event panelShown &this': function()
+	'event panelShown &this': async function(evt, args)
 	{
 		this.form.reset()
+		this.form.model.set(this.record = await db.get('tasks', Number(args.id)));
+
 		this.form.querySelector('input:first-child').focus();
 	},
 

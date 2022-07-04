@@ -1,11 +1,21 @@
 
-import { db, Element, Template } from 'riza';
+import { db, Element, Template, Router } from 'riza';
 import fs from 'fs';
 import utils from '../utils';
 
 Template.register('elapsed', function (args)
 {
 	return utils.elapsedTime(new Date(), utils.parseDate(args[1]));
+});
+
+Template.register('formatShortDateTime', function (args)
+{
+	return utils.formatShortDateTime(args[1]);
+});
+
+Template.register('formatShortDate', function (args)
+{
+	return utils.formatShortDate(args[1]);
 });
 
 Template.register('formatDuration', function (args)
@@ -102,5 +112,10 @@ Element.register('r-tasks', 'r-panel',
 			await db.put('tasks', task);
 			this.refresh();
 		});
+	},
+
+	editTask: function({ id })
+	{
+		Router.navigate('/tasks/edit/' + id);
 	}
 });

@@ -22,10 +22,12 @@ Element.register('r-reports', 'r-panel',
 
 	refresh: async function()
 	{
-		let tasks = await db.getAll('tasks');
 		let tmp;
 
 		const firstWeekDay = 5; // Sunday=0
+
+		// Load tasks.
+		let tasks = await db.getAll('tasks');
 
 		for (let i = 0; i < tasks.length; i++)
 		{
@@ -45,7 +47,7 @@ Element.register('r-reports', 'r-panel',
 
 			tasks[i].hours.sort((b, a) => a.datetime - b.datetime);
 
-			/* ** */
+			/* Daily */
 			tmp = utils.mapify(tasks[i].hours, 'date');
 			for (let i in tmp) tmp[i] = { date: i, duration: 0 };
 
@@ -54,7 +56,7 @@ Element.register('r-reports', 'r-panel',
 
 			tasks[i].hours_per_date = Object.values(tmp);
 
-			/* ** */
+			/* Weekly */
 			let min_datetime = new Date(tasks[i].hours.reduce((acc, cur) => acc === null ? cur : (cur.datetime < acc.datetime ? cur : acc), null).datetime);
 			let max_datetime = new Date(tasks[i].hours.reduce((acc, cur) => acc === null ? cur : (cur.datetime > acc.datetime ? cur : acc), null).datetime);
 
@@ -70,7 +72,7 @@ Element.register('r-reports', 'r-panel',
 			{
 				cur_datetime.setDate(cur_datetime.getDate() + 7);
 
-				let tmp2 = { date: utils.formatDate(min_datetime), duration: 0 };
+				let tmp2 = { starts: utils.formatDate(min_datetime), ends: utils.formatDate(cur_datetime), duration: 0 };
 
 				for (let j = 0; j < tasks[i].hours.length; j++)
 				{
@@ -86,6 +88,39 @@ Element.register('r-reports', 'r-panel',
 		}
 
 		this.model.set('tasks', tasks);
+
+		// Load hours/tasks of category.
+		let categories = [];
+
+		for (let category of await db.getAllUnique(db.index('tasks', 'category'), 'category'))
+		{
+			let hours = [];
+			let total = 0;
+
+			for (let task of await db.getAll(db.index('tasks', 'category'), category))
+			{
+				if (!task.total)
+					continue;
+
+				let tmp = await db.getAll(db.index('hours', 'task'), task.id);
+				if (!tmp.length) continue;
+
+				for (let j = 0; j < tmp.length; j++) {
+					tmp[j].task = task.name;
+					tmp[j].datetime = utils.parseDate(tmp[j].started);
+				}
+
+				hours = hours.concat(tmp);
+				total += task.total;
+			}
+
+			if (!total) continue;
+
+			hours.sort((b, a) => a.datetime - b.datetime);
+			categories.push({ name: category, total, hours });
+		}
+
+		this.model.set('categories', categories);
 	},
 
 	downloadCsv: function()
@@ -127,6 +162,24 @@ Element.register('r-reports', 'r-panel',
 			let task = await db.get('tasks', Number(id));
 			task.total = 0;
 			await db.put('tasks', task);
+
+			await this.refresh();
+		});
+	},
+
+	cleanCategoryHours: function ({ category })
+	{
+		utils.popupConfirm('Are you sure you want to clean this category?').then(async (response) =>
+		{
+			if (!response) return;
+
+			for (let task of await db.getAll(db.index('tasks', 'category'), category))
+			{
+				await db.deleteAll(db.index('hours', 'task'), task.id);
+
+				task.total = 0;
+				await db.put('tasks', task);
+			}
 
 			await this.refresh();
 		});

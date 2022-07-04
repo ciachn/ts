@@ -6,10 +6,16 @@
 	]
 	else [@
 		[each i [list] [@
-			<div data-action="toggleTaskTimer" data-id="[i.id]">
+			<div data-long-press="editTask" data-action="toggleTaskTimer" data-id="[i.id]">
 				<span>
 					<span class="line-clamp">[i.name]</span>
-					<small class="d-block"><small>[formatDuration [i.total]]</small></small>
+					<small class="d-block">
+						<small>[formatDuration [i.total]]</small>
+
+						[if [i.category] [@
+							<small class="badge-2">[i.category]</small>
+						]]
+					</small>
 				</span>
 
 				[if [not [i.started]] [@
@@ -35,3 +41,4 @@
 </div>
 
 <r-tasks-add></r-tasks-add>
+<r-tasks-edit></r-tasks-edit>
