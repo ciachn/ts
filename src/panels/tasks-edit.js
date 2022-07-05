@@ -56,8 +56,6 @@ Element.register('r-tasks-edit', 'r-panel',
 	{
 		this.form.reset()
 		this.form.model.set(this.record = await db.get('tasks', Number(args.id)));
-
-		this.form.querySelector('input:first-child').focus();
 	},
 
 	'event formSuccess &form': function()

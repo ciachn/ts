@@ -8,7 +8,7 @@ specifiers:
   cross-env: ^7.0.3
   parcel: ^2.6.2
   process: ^0.11.10
-  riza: ^1.1.18
+  riza: ^1.1.19
   shx: ^0.3.4
 
 devDependencies:
@@ -19,7 +19,7 @@ devDependencies:
   cross-env: 7.0.3
   parcel: 2.6.2
   process: 0.11.10
-  riza: 1.1.18
+  riza: 1.1.19
   shx: 0.3.4
 
 packages:
@@ -305,7 +305,7 @@ packages:
       '@parcel/logger': 2.6.2
       '@parcel/package-manager': 2.6.2_@parcel+core@2.6.2
       '@parcel/plugin': 2.6.2_@parcel+core@2.6.2
-      '@parcel/source-map': 2.0.5
+      '@parcel/source-map': 2.1.0
       '@parcel/types': 2.6.2_@parcel+core@2.6.2
       '@parcel/utils': 2.6.2
       '@parcel/workers': 2.6.2_@parcel+core@2.6.2
@@ -502,7 +502,7 @@ packages:
       '@parcel/css': 1.10.1
       '@parcel/diagnostic': 2.6.2
       '@parcel/plugin': 2.6.2_@parcel+core@2.6.2
-      '@parcel/source-map': 2.0.5
+      '@parcel/source-map': 2.1.0
       '@parcel/utils': 2.6.2
       browserslist: 4.21.1
       nullthrows: 1.1.1
@@ -561,7 +561,7 @@ packages:
     dependencies:
       '@parcel/diagnostic': 2.6.2
       '@parcel/plugin': 2.6.2_@parcel+core@2.6.2
-      '@parcel/source-map': 2.0.5
+      '@parcel/source-map': 2.1.0
       '@parcel/utils': 2.6.2
       nullthrows: 1.1.1
       terser: 5.14.1
@@ -590,7 +590,7 @@ packages:
     engines: {node: '>= 12.0.0', parcel: ^2.6.2}
     dependencies:
       '@parcel/plugin': 2.6.2_@parcel+core@2.6.2
-      '@parcel/source-map': 2.0.5
+      '@parcel/source-map': 2.1.0
       '@parcel/utils': 2.6.2
       nullthrows: 1.1.1
     transitivePeerDependencies:
@@ -617,9 +617,9 @@ packages:
       '@parcel/diagnostic': 2.6.2
       '@parcel/hash': 2.6.2
       '@parcel/plugin': 2.6.2_@parcel+core@2.6.2
-      '@parcel/source-map': 2.0.5
+      '@parcel/source-map': 2.1.0
       '@parcel/utils': 2.6.2
-      globals: 13.15.0
+      globals: 13.16.0
       nullthrows: 1.1.1
     transitivePeerDependencies:
       - '@parcel/core'
@@ -732,8 +732,8 @@ packages:
       - '@parcel/core'
     dev: true
 
-  /@parcel/source-map/2.0.5:
-    resolution: {integrity: sha512-DRVlCFKLpqBSIbMxUoVlHgfiv12HTW/U7nnhzw52YgzDVXUX9OA41dXS1PU0pJ1si+D1k8msATUC+AoldN43mg==}
+  /@parcel/source-map/2.1.0:
+    resolution: {integrity: sha512-E7UOEIof2o89LrKk1agSLmwakjigmEdDp1ZaEdsLVEvq63R/bul4Ij5CT+0ZDcijGpl5tnTbQADY9EyYGtjYgQ==}
     engines: {node: ^12.18.3 || >=14}
     dependencies:
       detect-libc: 1.0.3
@@ -745,7 +745,7 @@ packages:
     dependencies:
       '@parcel/diagnostic': 2.6.2
       '@parcel/plugin': 2.6.2_@parcel+core@2.6.2
-      '@parcel/source-map': 2.0.5
+      '@parcel/source-map': 2.1.0
       '@parcel/utils': 2.6.2
       browserslist: 4.21.1
       json5: 2.2.1
@@ -762,7 +762,7 @@ packages:
       '@parcel/css': 1.10.1
       '@parcel/diagnostic': 2.6.2
       '@parcel/plugin': 2.6.2_@parcel+core@2.6.2
-      '@parcel/source-map': 2.0.5
+      '@parcel/source-map': 2.1.0
       '@parcel/utils': 2.6.2
       browserslist: 4.21.1
       nullthrows: 1.1.1
@@ -807,7 +807,7 @@ packages:
       '@parcel/core': 2.6.2
       '@parcel/diagnostic': 2.6.2
       '@parcel/plugin': 2.6.2_@parcel+core@2.6.2
-      '@parcel/source-map': 2.0.5
+      '@parcel/source-map': 2.1.0
       '@parcel/utils': 2.6.2
       '@parcel/workers': 2.6.2_@parcel+core@2.6.2
       '@swc/helpers': 0.4.3
@@ -902,7 +902,7 @@ packages:
       '@parcel/diagnostic': 2.6.2
       '@parcel/fs': 2.6.2_@parcel+core@2.6.2
       '@parcel/package-manager': 2.6.2_@parcel+core@2.6.2
-      '@parcel/source-map': 2.0.5
+      '@parcel/source-map': 2.1.0
       '@parcel/workers': 2.6.2_@parcel+core@2.6.2
       utility-types: 3.10.0
     dev: true
@@ -914,7 +914,7 @@ packages:
       '@parcel/diagnostic': 2.6.2
       '@parcel/fs': 2.6.2_@parcel+core@2.6.2
       '@parcel/package-manager': 2.6.2_@parcel+core@2.6.2
-      '@parcel/source-map': 2.0.5
+      '@parcel/source-map': 2.1.0
       '@parcel/workers': 2.6.2_@parcel+core@2.6.2
       utility-types: 3.10.0
     transitivePeerDependencies:
@@ -930,7 +930,7 @@ packages:
       '@parcel/hash': 2.6.2
       '@parcel/logger': 2.6.2
       '@parcel/markdown-ansi': 2.6.2
-      '@parcel/source-map': 2.0.5
+      '@parcel/source-map': 2.1.0
       chalk: 4.1.2
     dev: true
 
@@ -1043,8 +1043,8 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001362
-      electron-to-chromium: 1.4.177
+      caniuse-lite: 1.0.30001363
+      electron-to-chromium: 1.4.178
       node-releases: 2.0.5
       update-browserslist-db: 1.0.4_browserslist@4.21.1
     dev: true
@@ -1065,8 +1065,8 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  /caniuse-lite/1.0.30001362:
-    resolution: {integrity: sha512-PFykHuC7BQTzCGQFaV6wD8IDRM3HpI83BXr99nNJhoOyDufgSuKlt0QVlWYt5ZJtEYFeuNVF5QY3kJcu8hVFjQ==}
+  /caniuse-lite/1.0.30001363:
+    resolution: {integrity: sha512-HpQhpzTGGPVMnCjIomjt+jvyUu8vNFo3TaDiZ/RcoTrlOq/5+tC8zHdsbgFB6MxmaY+jCpsH09aD80Bb4Ow3Sg==}
     dev: true
 
   /chalk/2.4.2:
@@ -1230,8 +1230,8 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  /electron-to-chromium/1.4.177:
-    resolution: {integrity: sha512-FYPir3NSBEGexSZUEeht81oVhHfLFl6mhUKSkjHN/iB/TwEIt/WHQrqVGfTLN5gQxwJCQkIJBe05eOXjI7omgg==}
+  /electron-to-chromium/1.4.178:
+    resolution: {integrity: sha512-aWuhJXkwIdoQzGR8p2QvR3N0OzdUKZSP8+P/hzuMzNQIPZoEa8HiCGM75bQBHjyz+eKT5PB9dVCzkK/tyQ4B5Q==}
     dev: true
 
   /entities/2.2.0:
@@ -1292,8 +1292,8 @@ packages:
       path-is-absolute: 1.0.1
     dev: true
 
-  /globals/13.15.0:
-    resolution: {integrity: sha512-bpzcOlgDhMG070Av0Vy5Owklpv1I6+j96GhUI7Rh7IzDCKLzboflLrrfqMu8NquDbiR4EOQk7XzJwqVJxicxog==}
+  /globals/13.16.0:
+    resolution: {integrity: sha512-A1lrQfpNF+McdPOnnFqY3kSN0AFTy485bTi1bkLk4mVPODIUEcSfhHgRqA+QdXPksrSTTztYXx37NFV+GpGk3Q==}
     engines: {node: '>=8'}
     dependencies:
       type-fest: 0.20.2
@@ -1697,8 +1697,8 @@ packages:
     resolution: {integrity: sha512-B7obXg1eARdIRufkm2alwPUdJ6eYRKVGk0uD0OUskRdDvgo8d8/kGSMizteuExp+kldZbcnw9m1TnzqQLsFKYw==}
     dev: true
 
-  /riza/1.1.18:
-    resolution: {integrity: sha512-mlxTlah/qZ4Fdmc1kGqMIeZ1/pxuXNX49wgOeNbk2raAZJ+RSZImfwkhWVWDdAdgZNW7/ozzovRcTq7DozmueQ==}
+  /riza/1.1.19:
+    resolution: {integrity: sha512-HfOzTpkUSbuMjqmabupNXIJE5auMnbkYcu8lsL+R9KW9cWM2IDZGGSj033OlogXvvJv6w/NAwe0j4PA1gpVZXg==}
     hasBin: true
     dependencies:
       base-64: 1.0.0

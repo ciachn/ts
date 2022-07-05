@@ -1,7 +1,7 @@
 /* ** */
 .tabs {
     flex: 0 0 auto; padding: 0; margin: 0; display: flex !important; flex-direction: row;
-	padding: 0rem 0.25rem 0 0.25rem;
+	padding: 0.5rem 0.25rem 0 0.25rem;
 }
 
 .tabs > a {
