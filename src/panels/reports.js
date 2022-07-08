@@ -123,30 +123,128 @@ Element.register('r-reports', 'r-panel',
 		this.model.set('categories', categories);
 	},
 
-	downloadCsv: function()
+	downloadCsv: function({ category })
 	{
 		let data = [];
+		let hours;
 
-		data.push(utils.csvRow(["Started", "Ended", "Duration", "Task"]));
-
-		let hours = [];
-
-		for (let i of this.model.data.tasks)
+		switch (category ? 'singleCategory' : this.reportsTab.activeTab)
 		{
-			for (let j of i.hours)
-				hours.push({ datetime: j.datetime, started: j.started, ended: j.ended, duration: j.duration, task: i.name });
+			case 'detailed':
+				data.push(utils.csvRow(["Started", "Ended", "Duration", "Task"]));
+				hours = [];
+
+				for (let i of this.model.data.tasks)
+				{
+					for (let j of i.hours)
+						hours.push({ datetime: j.datetime, started: j.started, ended: j.ended, duration: j.duration, task: i.name });
+				}
+
+				hours.sort((a, b) => a.datetime - b.datetime);
+
+				for (let i of hours)
+					data.push(utils.csvRow([
+						utils.csvRaw(utils.formatDateTime(i.started)), 
+						utils.csvRaw(utils.formatDateTime(i.ended)), 
+						utils.csvRaw(utils.formatDuration(i.duration)),
+						i.task]));
+
+				data.push(utils.csvRow(['', 'Total', utils.csvRaw(utils.formatDuration(hours.reduce((s,x) => s+x.duration, 0))), '']));
+				break;
+
+			case 'daily':
+				data.push(utils.csvRow(["Date", "Task", "Duration"]));
+				hours = [];
+
+				for (let i of this.model.data.tasks)
+				{
+					for (let j of i.hours_per_date)
+						hours.push({ datetime: j.datetime, date: j.date, duration: j.duration, task: i.name });
+				}
+
+				hours.sort((a, b) => a.datetime - b.datetime);
+
+				for (let i of hours)
+					data.push(utils.csvRow([
+						utils.csvRaw(utils.formatShortDate(i.date)), 
+						i.task,
+						utils.csvRaw(utils.formatDuration(i.duration))
+						]));
+
+				data.push(utils.csvRow(['', 'Total', utils.csvRaw(utils.formatDuration(hours.reduce((s,x) => s+x.duration, 0)))]));
+				break;
+
+			case 'weekly':
+				data.push(utils.csvRow(["Week", "Task", "Duration"]));
+				hours = [];
+
+				for (let i of this.model.data.tasks)
+				{
+					for (let j of i.hours_per_week)
+						hours.push({ datetime: j.datetime, starts: j.starts, ends: j.ends, duration: j.duration, task: i.name });
+				}
+
+				hours.sort((a, b) => a.datetime - b.datetime);
+
+				for (let i of hours)
+					data.push(utils.csvRow([
+						utils.csvRaw(utils.formatShortDate(i.starts) + ' to ' + utils.formatShortDate(i.ends)),
+						i.task,
+						utils.csvRaw(utils.formatDuration(i.duration))
+						]));
+
+				data.push(utils.csvRow(['', 'Total', utils.csvRaw(utils.formatDuration(hours.reduce((s,x) => s+x.duration, 0)))]));
+				break;
+
+			case 'category':
+				data.push(utils.csvRow(["Started", "Ended", "Category", "Task", "Duration"]));
+				hours = [];
+
+				for (let i of this.model.data.categories)
+				{
+					for (let j of i.hours)
+						hours.push({ datetime: j.datetime, started: j.started, ended: j.ended, duration: j.duration, category: i.name, task: j.task });
+				}
+
+				hours.sort((a, b) => a.datetime - b.datetime);
+
+				for (let i of hours)
+					data.push(utils.csvRow([
+						utils.csvRaw(utils.formatDateTime(i.started)), 
+						utils.csvRaw(utils.formatDateTime(i.ended)), 
+						i.category,
+						i.task,
+						utils.csvRaw(utils.formatDuration(i.duration))
+					]));
+
+				data.push(utils.csvRow(['', '', '', 'Total', utils.csvRaw(utils.formatDuration(hours.reduce((s,x) => s+x.duration, 0)))]));
+				break;
+
+			case 'singleCategory':
+				data.push(utils.csvRow(["Started", "Ended", "Task", "Duration"]));
+				hours = [];
+
+				for (let i of this.model.data.categories)
+				{
+					if (i.name != category) continue;
+
+					for (let j of i.hours)
+						hours.push({ datetime: j.datetime, started: j.started, ended: j.ended, duration: j.duration, task: j.task });
+				}
+
+				hours.sort((a, b) => a.datetime - b.datetime);
+
+				for (let i of hours)
+					data.push(utils.csvRow([
+						utils.csvRaw(utils.formatDateTime(i.started)), 
+						utils.csvRaw(utils.formatDateTime(i.ended)), 
+						i.task,
+						utils.csvRaw(utils.formatDuration(i.duration))
+					]));
+
+				data.push(utils.csvRow(['', '', 'Total', utils.csvRaw(utils.formatDuration(hours.reduce((s,x) => s+x.duration, 0)))]));
+				break;
 		}
-
-		hours.sort((a, b) => a.datetime - b.datetime);
-
-		for (let i of hours)
-			data.push(utils.csvRow([
-				utils.csvRaw(utils.formatDateTime(i.started)), 
-				utils.csvRaw(utils.formatDateTime(i.ended)), 
-				utils.csvRaw(utils.formatDuration(i.duration)),
-				i.task]));
-
-		data.push(utils.csvRow(['', 'Total', utils.csvRaw(utils.formatDuration(hours.reduce((s,x) => s+x.duration, 0))), '']));
 
 		Utils.showDownload ('report.csv', 'data:text/csv;base64,'+Api.base64.encode(data.join("\r\n")));
 	},
@@ -183,5 +281,10 @@ Element.register('r-reports', 'r-panel',
 
 			await this.refresh();
 		});
+	},
+
+	downloadCategory: function ({ category })
+	{
+		this.downloadCsv({ category });
 	}
 });

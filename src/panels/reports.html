@@ -1,4 +1,4 @@
-<r-tabs class="tabs-2" data-base-route="/reports/@/" data-initial="daily">
+<r-tabs class="tabs-2" data-base-route="/reports/@/" data-initial="daily" data-ref="reportsTab">
 	<a data-name="daily">Daily</a>
 	<a data-name="weekly">Weekly</a>
 	<a data-name="category">Category</a>
@@ -75,6 +75,7 @@
 			<div>
 				<b>
 					[catg.name]
+					<i data-action="downloadCategory" data-category="[catg.name]" class="fa fa-download me-5"></i>
 					<i data-action="cleanCategoryHours" data-category="[catg.name]" class="fa fa-backspace"></i>
 				</b>
 
