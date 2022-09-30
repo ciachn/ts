@@ -11,4 +11,6 @@ import './panels/home';
 import './panels/tasks';
 import './panels/tasks-add';
 import './panels/tasks-edit';
+
 import './panels/reports';
+import './panels/entries-edit';

@@ -1,5 +1,5 @@
 
-import { db, Api, Element, Utils } from 'riza';
+import { db, Api, Element, Utils, Router } from 'riza';
 import utils from '../utils';
 import fs from 'fs';
 
@@ -12,6 +12,22 @@ Element.register('r-reports', 'r-panel',
 	{
 		this.addClass('r-panel flex-fill d-flex flex-column overflow-auto');
 		this.dataset.route = "/reports/";
+	},
+
+	onConnected: function()
+	{
+		this._super['r-panel'].onConnected();
+
+		EventBus.watch('reports:hoursUpdated', () => {
+			this.refresh();
+		});
+	},
+
+	onDisconnected: function()
+	{
+		this._super['r-panel'].onDisconnected();
+
+		EventBus.unwatch('reports:hoursUpdated');
 	},
 
 	'route /reports/': function(evt, args)
@@ -286,5 +302,10 @@ Element.register('r-reports', 'r-panel',
 	downloadCategory: function ({ category })
 	{
 		this.downloadCsv({ category });
+	},
+
+	editEntry: function ({ id })
+	{
+		Router.navigate('/reports/detailed/' + id);
 	}
 });

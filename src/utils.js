@@ -4,7 +4,7 @@ import CustomDialog from './elems/custom-dialog';
 /**
  * Month names.
  */
-const monthName = [
+export let monthName = [
 	'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
 	'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
 ];
@@ -202,6 +202,9 @@ function parseDate (value)
 {
 	if (typeof(value) === 'Date')
 		return value;
+
+	if (value.length <= 10)
+		value += ' 00:00';
 
 	return new Date(str(value));
 }

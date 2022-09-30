@@ -85,11 +85,11 @@
     background: #222; border-radius: 0 0 0.4rem 0.4rem; padding: 0.8rem 1rem;
 }
 
-.dialog .form-control {
+.dialog .form-control, .dialog .form-select {
     background: #111; border: none; color: #fff; padding: 0.5rem 1rem;
 }
 
-.dialog .form-control:focus {
+.dialog .form-control:focus, .dialog .form-select:focus {
     outline: 1px solid #555; box-shadow: none;
 }
 
@@ -137,7 +137,7 @@ span.field-error {
 }
 
 .alert.alert-danger {
-    background: #222; color: #fff; border: none;
+    background: #222; color: #f80; border: none;
     padding: 1rem; text-align: center;
 }
 

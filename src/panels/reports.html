@@ -87,7 +87,7 @@
 				</div>
 
 				[each entry [catg.hours] [@
-				<div>
+				<div data-id="[entry.id]" data-long-press="editEntry">
 					<em>[entry.task]</em>
 					<em>[formatShortDateTime [entry.started]]</em>
 					<em>[formatShortDateTime [entry.ended]]</em>
@@ -124,8 +124,9 @@
 				</div>
 
 				[each entry [task.hours] [@
-				<div>
-					<em>[formatShortDateTime [entry.started]]</em>
+				<div data-id="[entry.id]" data-long-press="editEntry">
+					<em>
+						[formatShortDateTime [entry.started]]</em>
 					<em>[formatShortDateTime [entry.ended]]</em>
 					<em>[formatDuration [entry.duration]]</em>
 				</div>
@@ -148,3 +149,5 @@
 <div class="corner-buttons">
 	<a data-action="downloadCsv"><i class="fa fa-file-csv"></i></a>
 </div>
+
+<r-entries-edit></r-entries-edit>
